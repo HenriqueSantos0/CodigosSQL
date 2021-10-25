@@ -1,4 +1,3 @@
-Codigo em SQL do Curso de SQL da Eng DTP
 
 
 /* Criando tabelas em linguagem SQL*/
