@@ -1,0 +1,151 @@
+Estudos sobre SQL
+
+	Introdução a modelagem de dados
+		Banco de dados é uma conjunto de dado integrados que tem por finalidade atender uma comunidade
+		Sitema de gerencia de banco de dados é o software que incorpora as funções de definição, recuperação e alteração de banco de dados
+		O MySQL é um Sistema gerenciador de banco de dados(SGBD)
+
+	Para criar um projeto de banco de dados é nescessariontes passar pelos modelos
+	Modelo de banco de dados
+		Descrição formal da estrutura de um banco de dados
+	Modelo Conceitual
+		Modleo de dados abstrato, que descreve a estruut de um banco de dados de forma independente de um SGBD particular
+	Modelo Logico
+		Modleo de dados que representa a estrutura de dados de um banco de dados conforme a vista pelo ususario de SGBD. exemplo paradigma relacional com tabelas e o prardigma orientado a objetos com classes
+	Modleo Fisico
+		É uma representação grafica do detalhamento fisico das estrutrras dos dados que o banco de dados irá armazenar. Este modelo é indepenedente do SGBD em será implenetado	
+
+	
+
+	Modelo Conceitual
+		Cardinalidade de relacionamento
+			A cardinalidade de uma entidade em um relacionamento é o numero de ocorrencias de entedade associadas á um ocorrenciad a entidade em questão atraves do relacionamento
+				A cardinalidade minima de uma entidade em um relacionamento é o numero minimo de ocorrencias de entidade associadas á uma ocorrencia de entidade em questão atraves do relacionamento
+					0 - Reacionamento opcional
+					1 - Relacionamento obrigatorio
+				A cardinalidade maxima  de uma entidade em um relacionamento é o numero maximo de ocorrencias de entendidade associadas á uma ocorrencia da entidade em questão atraves do relacionamento
+					Cardinalidades mais comuns 1 e n
+					A cardinalidade maxima é usada para clasificar os relacionamentos binarios, aquels nos quais os realcionamentos se dão entre duas entidades.
+					Tipos de relaionamentos binarios
+						1:1
+						1:n
+						n:n
+			Cardinalidade 1:1
+				entidade1(1,1) - relaciona - (1,1)entidade2
+					Significa que significa que o relacionamento é obrigatorio e a entidade1 só pode se relacionar com uma entidade2 e vice versa
+				entidade1(0,1) - relaciona - (1,1)entidade2
+					Significa que o relacionamento é obrigatorio para a entidade1 e opcional para a entidade2, e que a entidade1 um só pode se relacionar com uma entidade2 e a entidade2 só pode se realcionar com uma entidade1
+				entidade1(1,1) - relaciona - (0,1)entidade2
+					Significa que o relacionamento é obrigatorio para a entidade2 e opcional para a entidade1, e que a entidade1 um só pode se relacionar com uma entidade2 e a entidade2 só pode se realcionar com uma entidade1
+				entidade1(0,1) - relaciona - (0,1)entidade2
+					Significa que o relacionamento é opcional para a entidade1 e entidade2, e que a entidade1 um só pode se relacionar com uma entidade2 e a entidade2 só pode se realcionar com uma entidade1
+			
+			Cardinalidade 1:n
+				entidade1(1,1) - relaciona - (1,n)entidade2
+					Significa que o relacionamento é obrigatorio para a entidade1 e entidade2, e que a entidade1 pode se relacionar com varios da entidade2 mas entidade2 só pode se realcionar com uma entidade1
+				entidade1(0,1) - relaciona - (1,n)entidade2
+					Significa que o relacionamento é obrigatorio para a entidade1 e opcional para a entidade2, e que a entidade1 pode se relacionar com varios da entidade2 mas a entidade2 só pode se realcionar com uma entidade1
+				entidade1(0,1) - relaciona - (0,n)entidade2
+					Significa que o relacionamento é opcional para a entidade1 e entidade2, e que a entidade1 pode se relacionar com varios da entidade2 mas a entidade2 só pode se realcionar com uma entidade1
+				entidade1(1,1) - relaciona - (0,n)entidade2
+					Significa que o relacionamento é opcional para a entidade1 e obrigatorio para a entidade2, e que a entidade1 pode se relacionar com varios da entidade2 mas a entidade2 só pode se realcionar com uma entidade1
+				
+			Cardinalidade n:n	
+				entidade1(1,n) - relaciona - (1,n)entidade2
+					Significa que o relacionamento é obrigatorio para a entidade1 e obrigatorio para a entidade2, e que a entidade1 pode se relacionar com varios da entidade2 e vice-versa
+				entidade1(0,n) - relaciona - (1,n)entidade2
+					Significa que o relacionamento é obrigatorio para a entidade1 e opcional para a entidade2, e que a entidade1 pode se relacionar com varios da entidade2 e vice-versa
+				entidade1(1,n) - relaciona - (0,n)entidade2
+					Significa que o relacionamento é opcional para a entidade1 e obrigatorio para a entidade2, e que a entidade1 pode se relacionar com varios da entidade2 e vice-versa
+				entidade1(0,n) - relaciona - (0,n)entidade2
+					Significa que o relacionamento é opcional para a entidade1 e oopcional para a entidade2, e que a entidade1 pode se relacionar com varios da entidade2 e vice-versa
+			
+
+	Modelo Logico
+		Mapeamento das entidades e seus reacionamentos no nivel logico
+		Nesse caso o modelo logico será com tabelas no paradigma reacional
+		Tendo tabelas com entidade, seus atributos serão colunas e o atributo identificador é a chave primaria.		
+		Cardinalidade 1:1
+			entidade1(0,1) - relaciona - (0,1)entidade2
+				Teremos como recurso chave estrangeira. Onde a coluna com a chave primaria(atributo identificador) de uma entidade é adicionado a outra. Necessario observar a restrição de integridade referencial, que determina que qualquer valor existente na chave estrangeira precisa obrigatoriamente existir na chave referenciada.
+			entidade1(1,1) - relaciona - (0,1)entidade2
+				Teremos como recurso chave estrangeira. Porém, como a entidade1 pode ou não se relacionar com a entidade2 é melhor colocar a chave estrangeira na entidade2. Dessa forma, podemos aplicar um restrição de nulidade e dizer que o campo da chave estrangeira na entidade2 é notnull, ou seja, qualquer individuo da entidade2 para existir precisa ter um individuo da entidade1 associado, e ainda, é necessario garantir a restrição de integridade.
+				Outro recurso pode ser a fusão de tabelas tendo como chave primaria o atributo indetificador da entidade1 poruqe a entidade1 sempre aparece, já que a entidade2 é obrigada a se relacionar coma entidade1.
+			entidade1(0,1) - relaciona - (1,1)entidade2
+				Teremos como recurso chave estrangeira. Porém, como a entidade2 pode ou não se relacionar com a entidade1 é melhor colocar a chave estrangeira na entidade1. Dessa forma, podemos aplicar um restrição de nulidade e dizer que o campo da chave estrangeira na entidade1 é notnull, ou seja, qualquer individuo da entidade1 para existir precisa ter um individuo da entidade2 associado, e ainda, é necessario garantir a restrição de integridade.
+				Outro recurso pode ser a fusão de tabelas tendo como chave primaria o atributo indetificador da entidade2 poruqe a entidade2 sempre aparece, já que a entidade1 é obrigada a se relacionar coma entidade2.
+			entidade1(1,1) - relaciona - (1,1)entidade2
+				O recuros utilizado nesse caso é a fusão de tabelas, contudo, só pode existir uma chave primaria que deve ser escolhida com decisão de projeto.
+		
+		Cardinalidade 1:n
+			entidade1(0,1) - relaciona - (0,n)entidade2
+				Teremos como recurso a chave estrangeira que deve ser colocada na entidade2, pois essa só pode se relacionar com um unico individuo da entidade1 e dessa forma as tabelas teram apenas atributos atomicos.
+			entidade1(1,1) - relaciona - (0,n)entidade2
+				Teremos como recurso a chave estrangeira que deve ser colocada na entidade2, pois essa só pode se relacionar com um unico individuo da entidade1 e dessa forma as tabelas teram apenas atributos atomicos. Além disso, é necessaria aplicar uma restrição de nulidade na chave estrangeira já que o relacionamento da entidade2 é obrigatorio.
+				É possivel existir um atributo do relacionamento, nesse caso, o atributo deve acompanahr a chave estrangeira.
+			
+			Realcionamento identificador
+				entidade1(0,1) - relaciona = (0,n)entidade2
+					Temos como recurso a chave estrangeira aplicada a entidade2. Nesse caso, a entidade2 é uma entidade fraca e não possui uma chave primaria mas sim uma chave parcial. Para entidade fraca a chave estrangeira em conhunto com a chave parcial vai forma uma chave primaria composta.
+
+		Cardinalidade n:n	
+			entidade1(0,n) - relaciona - (0,n)entidade2
+				Temos como solução a criação de uma teerceira tabela para descrever o relacionamento n:n. A tabela para descrever o relacionamento tem chave primaria composta, que deve utilizar a chave primaria das duas entidades.
+				É possivel existir um atributo identificador no relacionamento, nesse caso, a chave primaria será composta pelas chaves primarias das entidadesque são chaves estrangeiras nesse caso) e o atributo identificador do relacionamento.
+				É possivel tambem existir atributo do relacionamento que não é identificador, nesse caso esse atributo não compõe a chave primaria.
+				
+		Autorelacionamento
+			Normalmente um relacionamento associa entidades diferentes. Há um caso especial no qual há um relacionamento entre a mensma entidade. Nesta situação surge o conceito de PAPEL(função, responsabilidade, atuação) que identificará o relacionamento.
+			entidade(1,1) = relaciona
+				A entidade se autorelaciona com ela mesma. Dessa forma é necessario criar um chave estrangeira na tabela onde iremos mostar o relacionamento dos individuos dessa entidade com eles mesmos. Necessario que na chave estrangeira os atributos não se repitam. Observe que apesar de chamar de chave estrangeira, essa chave contem atributos de outra coluna da mesma tabela.
+			entidade(1,n) = relaciona
+				A entidade se autorelaciona com ela mesma. Dessa forma é necessario criar um chave estrangeira na tabela onde iremos mostar o relacionamento dos individuos dessa entidade com eles mesmos. Nesse caso na chave estrangeira os atributos podem se repetir. Observe que apesar de chamar de chave estrangeira, essa chave contem atributos de outra coluna da mesma tabela.
+			entidade(n,n) = relaciona
+				A entidade se autorelaciona com ela mesma. É necessario criar uma tabela de relacionamento onde a chave primaria é composta. 
+			
+		Normalização
+			Problemas de normalização surgem quando ao projetar um anco de dados existem redundancias não controladas que interferem na performance das consultas, gerando para as consultas resultados incorretos.
+			Primeira forma Normal
+				É a parte da definição formal de uma relação
+				Foi definida para não permitir atributos multivalorados, atributos compostos e suas combinações
+				Por definição - Uma relação está na primeira forma normal se e somente se os seus atributos contem apenas valores atomicos(simples, indivisiveis)	
+			Dependencia Funcional
+				Em uma tabela relacional, diz-se que uma coluna C2 depede funcionalmente de uma coluna C1( ou que uma coluna C1 determina a coluna C2) quando, em todas as linhs da tabela, para cada valor de C1 que aparece na tabela, aparece o mesmo valor de C2. C1=>C2
+				Dependencia funcional deve ser explicitamente definida por alguem que conheça a semantica dos atributos de uma relação.
+			Segunda Forma Normal
+				Por definição - Uma relaçao encontra-se na segunda forma normal, se e somente se estiver na primeira forma normal e não tiver dependencias parciais.
+				Dependecia parcial ocorre quando uma coluna depende apenas de uma parte de uma chave primaria composta.
+				Uma relação para estar na segunda forma normal não deve possuir atributo não-chave funcionalmente determinado por parte da chave primaria.
+			Terceira forma normal
+				Por definição - Uma relação está na terceira forma normal se e somente se estiver na segunda forma normal e nenhum atributo não-primo(isto é, que não seja membro de uma chave) for transitivamente dependente da chave primaria.
+				Dependecia transitiva ocorre quando uma coluna, além de dependder da chave primnaria de uma tabela, depende de outra coluna ou conjunto de colunas da tabela.
+				Uma relação para estar na terceira forma normal não pode ter um atributo não chave funcionalmente determinado por outro atributo não-chave. 
+	Modelo Logico - SQL
+	O software utilizado é o MySQL, porém a linguagem é padronizada, ou seja, a IDE importa pouco.
+	Criando esquemas de banco de dados
+		Um esquema é uma abstração para armazenar um conjunto de objetos de banco de dados que possuem uma relação semantica
+		O comando para criar esquemas é CREATESCHEMAmeu_primeiro_esquema
+	Funções DDL
+			
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
