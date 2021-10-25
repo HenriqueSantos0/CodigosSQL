@@ -53,3 +53,20 @@ INSERT INTO FUNCIONARIOS VALUES (16,'Jenifer','Feminino','jenifer@gmail.com','Re
 INSERT INTO FUNCIONARIOS VALUES (17,'Roberta','Feminino','roberta@hotmail.com','Sapatos',5500,'Gerente Administrativa','Ceará');
 
 INSERT INTO FUNCIONARIOS VALUES (18,'Anderson','Masculino','anderson@icloud.com','Cosméticos',2300,'Gerente','Amapá');
+
+
+/*Informações profissionais dos funcionarios*/
+
+SELECT nome,cargo,salario,estado FROM FUNCIONARIOS WHERE sexo='Masculino';
+
+/*Funciorais que recebem acima de R$ 3.000,00 em ordem ascendete*/
+
+SELECT * FROM FUNCIONARIOS WHERE Salario>3000 AND sexo='Feminino' ORDER BY salario ASC;
+
+/*Quantidade de funcionarios por estado*/
+
+SELECT estado, COUNT(*) AS 'numero de funcionariso' FROM FUNCIONARIOS GROUP BY estado;
+
+/*Contagem de funcionarios por sexo */
+
+SELECT sexo, count(*) as 'numero de funcionariso' from FUNCIONARIOS group by sexo;
